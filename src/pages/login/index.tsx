@@ -3,6 +3,7 @@ import {
     MdAccountCircle,
     MdPassword
 } from "react-icons/md";
+import Link from "next/link";
 
 const Login = () => {
     return (
@@ -12,7 +13,7 @@ const Login = () => {
             <Input inputType="text" placeholder="Username" icon={MdAccountCircle}></Input>
             <Input inputType="password" placeholder="Password" icon={MdPassword}></Input>
 
-            <p className="text-slate-700">Don't have an account yet? <a href="#" className="text-slate-50 font-bold">Sign Up</a></p>
+            <p className="text-slate-700">Don't have an account yet? <Link href="/register" className="text-slate-50 font-bold">Sign Up</Link></p>
         </main>
     );
 }
