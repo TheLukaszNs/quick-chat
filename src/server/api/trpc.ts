@@ -19,8 +19,11 @@
 import { type CreateNextContextOptions } from "@trpc/server/adapters/next";
 import { type Session } from "next-auth";
 
-import { getServerAuthSession } from "../auth";
+import { getSession } from "next-auth/react";
+import { type NodeHTTPCreateContextFnOptions } from "@trpc/server/adapters/node-http";
 import { prisma } from "../db";
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+import ws from "ws";
 
 type CreateContextOptions = {
   session: Session | null;
@@ -47,11 +50,13 @@ const createInnerTRPCContext = (opts: CreateContextOptions) => {
  * process every request that goes through your tRPC endpoint
  * @link https://trpc.io/docs/context
  */
-export const createTRPCContext = async (opts: CreateNextContextOptions) => {
-  const { req, res } = opts;
-
+export const createTRPCContext = async (
+  opts:
+    | CreateNextContextOptions
+    | NodeHTTPCreateContextFnOptions<IncomingMessage, ws>
+) => {
   // Get the session from the server using the unstable_getServerSession wrapper function
-  const session = await getServerAuthSession({ req, res });
+  const session = await getSession(opts);
 
   return createInnerTRPCContext({
     session,
@@ -66,6 +71,7 @@ export const createTRPCContext = async (opts: CreateNextContextOptions) => {
  */
 import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
+import { type IncomingMessage } from "http";
 
 const t = initTRPC
   .context<Awaited<ReturnType<typeof createTRPCContext>>>()

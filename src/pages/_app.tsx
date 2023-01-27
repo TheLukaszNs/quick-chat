@@ -10,6 +10,12 @@ const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
+  api.randomNumber.useSubscription(undefined, {
+    onData(data) {
+      console.log(data);
+    },
+  });
+
   return (
     <SessionProvider session={session}>
       <Component {...pageProps} />
