@@ -10,10 +10,10 @@ interface MessageProps{
 const MessageUser = ({message,user,isDm}: MessageProps  ) => {
   return (
 
-    <div className='flex'>
-      <div><img src={`data:image/jpeg;base64,${user.image}`} alt=""></img></div>
+    <div className='flex w-4/5 m-auto mb-5' >
+      <div><img src={`data:image/jpeg;base64,${user.image}`} className="h-10 w-10 rounded-full" alt=""></img></div>
       <div className='flex-col'>
-        {isDm && <div>{user.name}</div>}
+        {isDm && <div>@{user.name}</div>}
         <div>{message}</div>
       </div>
 

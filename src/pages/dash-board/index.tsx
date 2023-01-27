@@ -1,5 +1,6 @@
 import React from 'react'
-import MessageUser from '../commponents/MessageUser'
+import { MessageHeader } from '../../commponents/MessageHeader'
+import MessageUser from '../../commponents/MessageUser'
 
 const MessagePage = () => {
     const User={name:"Wiesiu",
@@ -7,7 +8,11 @@ const MessagePage = () => {
 }
 
   return (
+    <>
+    <MessageHeader name="pokoj MS" photo={User.image} isRoom={true} active={21}></MessageHeader>
     <MessageUser message="siema" user={User} isDm={true}></MessageUser>
+    <MessageUser message="siema" user={User} isDm={true}></MessageUser>
+    </>
   )
 }
 
