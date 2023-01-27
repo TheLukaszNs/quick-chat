@@ -1,7 +1,7 @@
 import Input from "../../components/Input";
 import { MdAccountCircle, MdEmail, MdPassword } from "react-icons/md";
 import Link from "next/link";
-import Button from "../../components/button";
+import Button from "../../components/Button";
 
 const Register = () => {
   return (
