@@ -1,14 +1,14 @@
-type Props = {
-  buttonText: string;
-};
+import { ComponentPropsWithoutRef, HTMLProps } from "react";
 
-const Button = ({ buttonText }: Props) => {
+type Props = ComponentPropsWithoutRef<"button">;
+
+const Button = ({ children, ...props }: Props) => {
   return (
     <button
-      type="submit"
+      {...props}
       className="my-4 h-16 w-80 rounded-2xl border-2 border-blue-400 text-blue-400"
     >
-      {buttonText}
+      {children}
     </button>
   );
 };

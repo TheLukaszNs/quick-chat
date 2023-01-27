@@ -12,7 +12,7 @@ const Register = () => {
       <Input inputType="email" placeholder="Email" icon={MdEmail} />
       <Input inputType="password" placeholder="Password" icon={MdPassword} />
 
-      <Button buttonText="Sign Up" />
+      <Button type="submit">Sign Up</Button>
 
       <p className="text-slate-700">
         Already have an account?{" "}

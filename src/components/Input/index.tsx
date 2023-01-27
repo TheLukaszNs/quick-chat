@@ -3,7 +3,7 @@ import { IconType } from "react-icons/lib/esm/iconBase";
 
 type Props = {
   inputType: InputHTMLAttributes<HTMLInputElement>["type"];
-  placeholder: InputHTMLAttributes<HTMLInputElement>["placeholder"];
+  placeholder: string;
   icon: IconType;
 };
 
@@ -15,7 +15,9 @@ const Input = ({ inputType, placeholder, icon: Icon }: Props) => {
         className="ml-6 rounded-2xl bg-inherit font-bold text-slate-50 outline-none"
         placeholder={placeholder}
       />
-      <div className="mr-6 font-bold text-slate-50">{<Icon />}</div>
+      <div className="mr-6 font-bold text-slate-50">
+        <Icon />
+      </div>
     </div>
   );
 };

@@ -8,18 +8,10 @@ const Login = () => {
     <main className="flex h-screen w-screen flex-col items-center justify-center bg-slate-900">
       <h1 className="my-4 text-6xl font-bold text-slate-50">Quick Chat</h1>
 
-      <Input
-        inputType="text"
-        placeholder="Username"
-        icon={MdAccountCircle}
-      ></Input>
-      <Input
-        inputType="password"
-        placeholder="Password"
-        icon={MdPassword}
-      ></Input>
+      <Input inputType="text" placeholder="Username" icon={MdAccountCircle} />
+      <Input inputType="password" placeholder="Password" icon={MdPassword} />
 
-      <Button buttonText="Sign In" />
+      <Button type="submit">Sign In</Button>
 
       <p className="text-slate-700">
         Don't have an account yet?{" "}
