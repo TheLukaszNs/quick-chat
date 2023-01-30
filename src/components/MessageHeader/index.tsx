@@ -22,7 +22,7 @@ export const MessageHeader = ({ name, photo, isRoom, active }: HeaderProps) => {
           ></img>
         </div>
         <div className="flex-col px-5">
-          <div>{name}</div>
+          <div className="text-slate-50">{name}</div>
           {isRoom ? (
             <div className="text-green-600">{active} Aktywni</div>
           ) : (
@@ -31,11 +31,11 @@ export const MessageHeader = ({ name, photo, isRoom, active }: HeaderProps) => {
         </div>
       </div>
       {isRoom ? (
-        <Link href="/AddUser">
+        <Link href="/add-user" className="text-slate-50">
           <BsFillPersonPlusFill />
         </Link>
       ) : (
-        <Link href="/NewMessage">
+        <Link href="/new-message" className="text-slate-50">
           <BiMessageRoundedAdd />
         </Link>
       )}
