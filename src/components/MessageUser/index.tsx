@@ -1,6 +1,6 @@
 import { User } from "@prisma/client";
 import React from "react";
-import Image from "next/image"
+import Image from "next/image";
 
 interface MessageProps {
   message: string;
@@ -14,8 +14,10 @@ const MessageUser = ({ message, user, isDm }: MessageProps) => {
       <div>
         <Image
           src={`data:image/jpeg;base64,${user.image}`}
-          className="mr-2 h-10 w-10 rounded-full"
+          className="mr-2 rounded-full"
           alt=""
+          width="40"
+          height="40"
         ></Image>
       </div>
       <div className="flex-col">

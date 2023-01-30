@@ -13,13 +13,15 @@ interface HeaderProps {
 
 export const MessageHeader = ({ name, photo, isRoom, active }: HeaderProps) => {
   return (
-    <nav className="sticky top-0 left-0 right-0 mb-5 flex items-center justify-between bg-slate-800 p-5">
+    <nav className="sticky top-0 left-0 right-0 mb-5 flex w-screen items-center justify-between bg-slate-800 p-5">
       <div className="flex items-center">
         <div>
           <Image
             src={`data:image/jpeg;base64,${photo}`}
-            className="h-10 w-10 rounded-full "
+            className="rounded-full "
             alt=""
+            width="40"
+            height="40"
           ></Image>
         </div>
         <div className="flex-col px-5">
@@ -43,3 +45,5 @@ export const MessageHeader = ({ name, photo, isRoom, active }: HeaderProps) => {
     </nav>
   );
 };
+
+export default MessageHeader;
