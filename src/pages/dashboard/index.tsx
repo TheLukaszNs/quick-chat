@@ -10,16 +10,16 @@ const MessagePage = () => {
   };
 
   return (
-    <>
+    <div className="h-screen bg-slate-900">
       <MessageHeader
-        name="pokoj MS"
+        name="User"
         photo={User.image}
         isRoom={true}
         active={21}
       ></MessageHeader>
       <MessageUser message="siema" user={User} isDm={true}></MessageUser>
       <MessageUser message="siema" user={User} isDm={true}></MessageUser>
-    </>
+    </div>
   );
 };
 

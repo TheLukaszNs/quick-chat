@@ -13,13 +13,13 @@ const MessageUser = ({ message, user, isDm }: MessageProps) => {
       <div>
         <img
           src={`data:image/jpeg;base64,${user.image}`}
-          className="h-10 w-10 rounded-full"
+          className="mr-2 h-10 w-10 rounded-full"
           alt=""
         ></img>
       </div>
       <div className="flex-col">
-        {isDm && <div>@{user.name}</div>}
-        <div>{message}</div>
+        {isDm && <div className="font-bold text-slate-50">@{user.name}</div>}
+        <div className="text-slate-50">{message}</div>
       </div>
     </div>
   );
