@@ -4,7 +4,7 @@ import { MessageHeader } from "../../components/MessageHeader";
 const Server = () => {
   return (
     <main className="flex h-screen w-screen flex-col bg-slate-900">
-      <MessageHeader name="Sample Name" photo="" isRoom active={10} />
+      <MessageHeader name="Sample Name" photo="" isRoom={true} active={10} />
 
       <Accordion.Root
         type="single"
