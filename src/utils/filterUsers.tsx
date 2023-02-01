@@ -1,10 +1,9 @@
 import { User } from "@prisma/client";
-import { Dispatch, SetStateAction } from "react";
 
 export const filterUsers = (
   username: string,
   users: User[],
-  setUsersCallback: Dispatch<SetStateAction<User[]>>
+  setUsersCallback: (users: User[]) => void
 ) => {
   if (username === "") {
     setUsersCallback(users);
