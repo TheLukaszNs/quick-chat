@@ -25,39 +25,38 @@ const index = () => {
     if (!value) return;
     setMessages((prev) => [...prev, { id: 4, user: User, message: value }]);
     changeValue("");
-
-    // inputRef.current.value = "";
   };
 
   return (
-    <main className="flex h-screen w-screen flex-col items-center bg-slate-900">
+    <main className="flex h-screen w-screen flex-col overflow-hidden bg-slate-900">
       <MessageHeader
         name="Wiesiu Sus"
         photo={User.image}
         active={1}
         isRoom={false}
       ></MessageHeader>
+      <div className="flex h-full max-h-[80%] flex-col justify-end bg-slate-900">
+        <div className="overflow-y-scroll">
+          {messages.map((element) => {
+            return (
+              <MessageUser
+                message={element.message}
+                user={element.user}
+                isDm={true}
+                key={element.id}
+              ></MessageUser>
+            );
+          })}
+        </div>
 
-      <div className="overflow-y-auto">
-        {messages.map((element) => {
-          return (
-            <MessageUser
-              message={element.message}
-              user={element.user}
-              isDm={true}
-              key={element.id}
-            ></MessageUser>
-          );
-        })}
-      </div>
-
-      <div>
-        <Input
-          inputType="search"
-          icon={AiOutlineSend}
-          placeholder="Wpisz Wiadomość"
-          clickIconFunction={handleClick}
-        ></Input>
+        <div className="self-center">
+          <Input
+            inputType="search"
+            icon={AiOutlineSend}
+            placeholder="Wpisz Wiadomość"
+            clickIconFunction={handleClick}
+          ></Input>
+        </div>
       </div>
     </main>
   );
