@@ -4,6 +4,7 @@ import { useState } from "react";
 import { User } from "@prisma/client";
 import UserListItem from "../../components/UserListItem";
 import { filterUsers } from "../../utils/filterUsers";
+import Link from "next/link";
 
 const mockUsers = [
   {
@@ -57,7 +58,11 @@ const NewMessage = () => {
 
       <div>
         {users.map((user: User, key) => {
-          return <UserListItem user={user} key={key} />;
+          return (
+            <Link href="/message" key={key}>
+              <UserListItem user={user} />
+            </Link>
+          );
         })}
       </div>
     </main>
