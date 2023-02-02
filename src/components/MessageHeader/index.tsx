@@ -2,9 +2,9 @@ import React from "react";
 import Link from "next/link";
 import { BsFillPersonPlusFill } from "react-icons/bs";
 import { BiMessageRoundedAdd } from "react-icons/bi";
+import Image from "next/image";
 import { MdLogout } from "react-icons/md";
 import { signOut } from "next-auth/react";
-
 interface HeaderProps {
   name: string;
   photo: string;
@@ -14,14 +14,16 @@ interface HeaderProps {
 
 export const MessageHeader = ({ name, photo, isRoom, active }: HeaderProps) => {
   return (
-    <nav className="sticky top-0 left-0 right-0 mb-5 flex w-full items-center justify-between bg-slate-800 p-5">
+    <nav className="sticky top-0 left-0 right-0 mb-5 flex w-screen items-center justify-between bg-slate-800 p-5">
       <div className="flex items-center">
         <div>
-          <img
+          <Image
             src={`data:image/jpeg;base64,${photo}`}
-            className="h-10 w-10 rounded-full "
+            className="rounded-full "
             alt=""
-          ></img>
+            width="40"
+            height="40"
+          ></Image>
         </div>
         <div className="flex-col px-5">
           <div className="text-slate-50">{name}</div>
@@ -50,3 +52,5 @@ export const MessageHeader = ({ name, photo, isRoom, active }: HeaderProps) => {
     </nav>
   );
 };
+
+export default MessageHeader;
