@@ -1,6 +1,7 @@
 import { createTRPCRouter, publicProcedure } from "./trpc";
 import { exampleRouter } from "./routers/example";
-import { observable } from "@trpc/server/observable";
+import { authRouter } from "./routers/auth";
+import { serverRouter } from "./routers/server";
 
 /**
  * This is the primary router for your server.
@@ -9,17 +10,9 @@ import { observable } from "@trpc/server/observable";
  */
 export const appRouter = createTRPCRouter({
   example: exampleRouter,
+  auth: authRouter,
+  server: serverRouter,
   healthcheck: publicProcedure.query(() => "yay!"),
-  randomNumber: publicProcedure.subscription(() => {
-    return observable<number>((emit) => {
-      const int = setInterval(() => {
-        emit.next(Math.random());
-      }, 500);
-      return () => {
-        clearInterval(int);
-      };
-    });
-  }),
 });
 
 // export type definition of API

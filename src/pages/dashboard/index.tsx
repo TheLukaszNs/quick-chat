@@ -14,7 +14,7 @@ const MessagePage = () => {
       <MessageHeader
         name="User"
         photo={User.image}
-        isRoom={true}
+        isRoom={false}
         active={21}
       ></MessageHeader>
       <MessageUser message="siema" user={User} isDm={true}></MessageUser>
