@@ -55,6 +55,7 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
+    servers       Server[]
 }
 
 model VerificationToken {
@@ -63,4 +64,10 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+model Server {
+    id    String @id @default(cuid())
+    name  String
+    users User[]
 }
