@@ -48,14 +48,17 @@ model Session {
 }
 
 model User {
-    id            String    @id @default(cuid())
-    name          String?
-    email         String?   @unique
-    emailVerified DateTime?
-    image         String?
-    accounts      Account[]
-    sessions      Session[]
-    servers       Server[]
+    id             String          @id @default(cuid())
+    name           String?
+    email          String?         @unique
+    emailVerified  DateTime?
+    image          String?
+    accounts       Account[]
+    sessions       Session[]
+    servers        Server[]
+    directRooms    DirectRoom[]
+    messages       Message[]
+    directMessages DirectMessage[]
 }
 
 model VerificationToken {
@@ -66,8 +69,47 @@ model VerificationToken {
     @@unique([identifier, token])
 }
 
+model Message {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    content   String
+    author    User     @relation(fields: [authorId], references: [id])
+    authorId  String
+    room      Room     @relation(fields: [roomId], references: [id])
+    roomId    String
+}
+
+model DirectMessage {
+    id        String     @id @default(cuid())
+    createdAt DateTime   @default(now())
+    updatedAt DateTime   @updatedAt
+    content   String
+    author    User       @relation(fields: [authorId], references: [id])
+    authorId  String
+    room      DirectRoom @relation(fields: [roomId], references: [id])
+    roomId    String
+}
+
+model Room {
+    id        String    @id @default(cuid())
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    name      String
+    messages  Message[]
+    server    Server    @relation(fields: [serverId], references: [id])
+    serverId  String
+}
+
 model Server {
     id    String @id @default(cuid())
     name  String
+    rooms Room[]
     users User[]
+}
+
+model DirectRoom {
+    id       String          @id @default(cuid())
+    users    User[]
+    messages DirectMessage[]
 }
