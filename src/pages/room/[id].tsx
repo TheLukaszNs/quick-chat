@@ -3,17 +3,14 @@ import MessageHeader from "../../components/MessageHeader";
 import MessageUser from "../../components/MessageUser";
 import InputMessage from "../../components/InputMessage";
 import { AiOutlineSend } from "react-icons/ai";
+import { Message, User } from "@prisma/client";
 
 const Room = () => {
-  const [messages, setMessages] = useState([
-    { id: 0, message: "blue is impostor", user: User },
-    { id: 1, message: "I saw blue vent", user: User },
-    { id: 2, message: "vote for blue", user: User },
-  ]);
+  const [messages, setMessages] = useState<Message[]>([]);
 
   const handleSend = (value: string): void => {
     if (!value) return;
-    setMessages((prev) => [...prev, { id: 4, user: User, message: value }]);
+    //setMessages();
   };
 
   return (
@@ -29,8 +26,8 @@ const Room = () => {
           {messages.map((element) => {
             return (
               <MessageUser
-                message={element.message}
-                user={element.user}
+                message={element.content}
+                user={{}}
                 isDm={true}
                 key={element.id}
               ></MessageUser>
