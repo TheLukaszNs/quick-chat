@@ -18,7 +18,7 @@ export const MessageHeader = ({ name, photo, isRoom, active }: HeaderProps) => {
       <div className="flex items-center">
         <div>
           <Image
-            src={`data:image/jpeg;base64,${photo}`}
+            src={photo}
             className="rounded-full "
             alt=""
             width="40"
@@ -46,7 +46,11 @@ export const MessageHeader = ({ name, photo, isRoom, active }: HeaderProps) => {
         )}
         <MdLogout
           className="ml-10 text-slate-50"
-          onClick={() => void signOut()}
+          onClick={() =>
+            void signOut({
+              callbackUrl: "/",
+            })
+          }
         />
       </div>
     </nav>
