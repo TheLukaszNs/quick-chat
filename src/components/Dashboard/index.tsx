@@ -1,4 +1,4 @@
-import { User } from "@prisma/client";
+import { DirectMessage, User } from "@prisma/client";
 import MessageHeader from "../MessageHeader";
 import { useRouter } from "next/router";
 import { api } from "../../utils/api";
@@ -21,11 +21,13 @@ const Dashboard = ({ user }: Props) => {
         active={21}
       ></MessageHeader>
       {directRooms.data?.map((directRoom, index) => {
+        const messages = directRoom.messages;
+
         return (
           <MessageUser
             key={index}
-            message="Ostatnia wiadomość"
-            user={"User 1"}
+            message={messages[messages.length - 1]?.content ?? ""}
+            user={"User"}
           />
         );
       })}
