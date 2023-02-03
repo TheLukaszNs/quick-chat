@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import MessageHeader from "../../components/MessageHeader";
 import MessageUser from "../../components/MessageUser";
-import Input from "../../components/Input";
+import InputValue from "../../components/Input/inputValue";
 import { AiOutlineSend } from "react-icons/ai";
 
 const index = () => {
@@ -17,14 +17,9 @@ const index = () => {
     { id: 2, message: "vote for blue", user: User },
   ]);
 
-  const handleClick = (
-    e: React.FormEvent<HTMLTextAreaElement>,
-    value: string,
-    changeValue: () => void
-  ): void => {
+  const handleSend = (value: string): void => {
     if (!value) return;
     setMessages((prev) => [...prev, { id: 4, user: User, message: value }]);
-    changeValue("");
   };
 
   return (
@@ -50,12 +45,12 @@ const index = () => {
         </div>
 
         <div className="self-center">
-          <Input
+          <InputValue
             inputType="search"
             icon={AiOutlineSend}
-            placeholder="Wpisz Wiadomość"
-            clickIconFunction={handleClick}
-          ></Input>
+            placeholder="wyslij wiadomosc"
+            handleSend={handleSend}
+          ></InputValue>
         </div>
       </div>
     </main>
