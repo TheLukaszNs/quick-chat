@@ -16,7 +16,11 @@ export const directRouter = createTRPCRouter({
         id,
       },
       select: {
-        directRooms: true,
+        directRooms: {
+          include: {
+            messages: true,
+          },
+        },
       },
     });
 
