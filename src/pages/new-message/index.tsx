@@ -63,7 +63,7 @@ const NewMessage = () => {
         icon={MdGroup}
         onKeyDown={(e) => {
           if (e.key == "Enter" && e.currentTarget.value !== "") {
-            api.
+            // api.
             void router.push("/server");
             
           }
