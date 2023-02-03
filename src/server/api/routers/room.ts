@@ -1,32 +1,67 @@
+import { Message } from "@prisma/client";
 import { observable } from "@trpc/server/observable";
 import { z } from "zod";
 import { eventEmitter } from "../root";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
+const newMessageEventKeyBuilder = <T extends string>(roomId: T) =>
+  `new-message-${roomId}` as const;
+
 export const roomRouter = createTRPCRouter({
-  onNewMessage: protectedProcedure.subscription(() => {
-    return observable<any>((emit) => {
-      const onNewMessage = (data: any) => {
-        emit.next(data);
-      };
+  onNewMessage: protectedProcedure
+    .input(
+      z.object({
+        roomId: z.string(),
+      })
+    )
+    .subscription(({ input }) => {
+      const { roomId } = input;
 
-      eventEmitter.on("new-message", onNewMessage);
+      const eeKey = newMessageEventKeyBuilder(roomId);
 
-      return () => {
-        eventEmitter.off("new-message", onNewMessage);
-      };
-    });
-  }),
+      return observable<Message>((emit) => {
+        const onNewMessage = (data: Message) => {
+          emit.next(data);
+        };
+
+        eventEmitter.on(eeKey, onNewMessage);
+
+        return () => {
+          eventEmitter.off(eeKey, onNewMessage);
+        };
+      });
+    }),
   newMessage: protectedProcedure
     .input(
       z.object({
+        roomId: z.string(),
         text: z.string().min(1),
       })
     )
     .mutation(({ ctx, input }) => {
-      const { text } = input;
+      const { text, roomId } = input;
       const { id: userId } = ctx.session.user;
 
-      eventEmitter.emit("new-message", { text, userId });
+      const eeKey = newMessageEventKeyBuilder(roomId);
+
+      const message = ctx.prisma.message.create({
+        data: {
+          content: text,
+          author: {
+            connect: {
+              id: userId,
+            },
+          },
+          room: {
+            connect: {
+              id: roomId,
+            },
+          },
+        },
+      });
+
+      eventEmitter.emit(eeKey, message);
+
+      return message;
     }),
 });
