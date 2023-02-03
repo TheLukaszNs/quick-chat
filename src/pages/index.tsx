@@ -1,8 +1,8 @@
-import { NextPage } from "next";
+import { type NextPage } from "next";
 import Button from "../components/Button";
 import { signIn, useSession } from "next-auth/react";
 import Dashboard from "../components/Dashboard";
-import { User } from "@prisma/client";
+import type { User } from "@prisma/client";
 
 const Home: NextPage = () => {
   const { data: session, status } = useSession();

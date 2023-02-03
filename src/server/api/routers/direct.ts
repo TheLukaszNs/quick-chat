@@ -1,4 +1,4 @@
-import { DirectMessage } from "@prisma/client";
+import type { DirectMessage } from "@prisma/client";
 import { observable } from "@trpc/server/observable";
 import { z } from "zod";
 import { eventEmitter } from "../root";

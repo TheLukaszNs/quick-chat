@@ -1,6 +1,6 @@
 import Input from "../../components/Input";
 import { MdSearch } from "react-icons/md";
-import { User } from "@prisma/client";
+import type { User } from "@prisma/client";
 import { useState } from "react";
 import UserListItem from "../../components/UserListItem";
 import { filterUsers } from "../../utils/filterUsers";

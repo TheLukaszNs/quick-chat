@@ -1,6 +1,5 @@
-import { DirectMessage, User } from "@prisma/client";
+import type { User } from "@prisma/client";
 import MessageHeader from "../MessageHeader";
-import { useRouter } from "next/router";
 import { api } from "../../utils/api";
 import MessageUser from "../MessageUser";
 
@@ -9,7 +8,6 @@ type Props = {
 };
 
 const Dashboard = ({ user }: Props) => {
-  const { query } = useRouter();
   const directRooms = api.direct.getAll.useQuery();
   const servers = api.server.getAll.useQuery();
 
@@ -28,7 +26,10 @@ const Dashboard = ({ user }: Props) => {
           <MessageUser
             key={index}
             message={messages[messages.length - 1]?.content ?? ""}
-            user={"User"}
+            user={{
+              name: "",
+              image: "",
+            }}
           />
         );
       })}

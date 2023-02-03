@@ -14,7 +14,7 @@ const Login = () => {
       <Button type="submit">Sign In</Button>
 
       <p className="text-slate-700">
-        Don't have an account yet?{" "}
+        Don&apos;t have an account yet?{" "}
         <Link href="/register" className="font-bold text-slate-50">
           Sign Up
         </Link>
