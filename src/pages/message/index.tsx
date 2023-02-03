@@ -4,7 +4,7 @@ import MessageUser from "../../components/MessageUser";
 import InputMessage from "../../components/InputMessage";
 import { AiOutlineSend } from "react-icons/ai";
 
-const index = () => {
+const Message = () => {
   const User = {
     name: "Wiesiu",
     image:
@@ -57,4 +57,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Message;
