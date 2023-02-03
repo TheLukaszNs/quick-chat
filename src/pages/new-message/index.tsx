@@ -4,7 +4,6 @@ import { useState } from "react";
 import type { User } from "@prisma/client";
 import UserListItem from "../../components/UserListItem";
 import { filterUsers } from "../../utils/filterUsers";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { api } from "../../utils/api";
 import { useSession } from "next-auth/react";
@@ -48,7 +47,7 @@ const NewMessage = () => {
 
   async function handleNewDirectRoom(receiverId: string) {
     const room = await addDirectRoomMutation.mutateAsync({
-      userId: session!.user!.id,
+      userId: session?.user?.id ?? "0",
       receiverId: receiverId,
     });
     void router.push(`/room/${room.id}`);
