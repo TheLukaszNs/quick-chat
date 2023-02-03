@@ -5,7 +5,6 @@ type Props = ComponentPropsWithoutRef<"input"> & {
   inputType: InputHTMLAttributes<HTMLInputElement>["type"];
   icon: IconType;
 };
-
 const Input = ({ inputType, placeholder, icon: Icon, ...props }: Props) => {
   return (
     <div className="my-4 flex h-16 w-80 flex-row items-center justify-between rounded-2xl bg-slate-600">
