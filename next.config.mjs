@@ -17,5 +17,15 @@ const config = {
     APP_URL: process.env.APP_URL,
     WS_URL: process.env.WS_URL,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.discordapp.com",
+        port: "",
+        pathname: "/avatars/**",
+      },
+    ],
+  },
 };
 export default config;

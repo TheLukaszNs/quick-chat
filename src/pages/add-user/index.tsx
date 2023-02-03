@@ -4,6 +4,7 @@ import type { User } from "@prisma/client";
 import { useState } from "react";
 import UserListItem from "../../components/UserListItem";
 import { filterUsers } from "../../utils/filterUsers";
+import { useRouter } from "next/router";
 
 const mockUsers = [
   {
@@ -38,6 +39,7 @@ const mockUsers = [
 
 const AddUser = () => {
   const [users, setUsers] = useState<User[]>(mockUsers);
+  const router = useRouter();
 
   return (
     <main className="flex h-screen w-screen flex-col items-center bg-slate-900">
@@ -56,7 +58,15 @@ const AddUser = () => {
 
       <div>
         {users.map((user: User, key) => {
-          return <UserListItem user={user} key={key} />;
+          return (
+            <UserListItem
+              user={user}
+              key={key}
+              onClick={() => {
+                void router.back();
+              }}
+            />
+          );
         })}
       </div>
     </main>

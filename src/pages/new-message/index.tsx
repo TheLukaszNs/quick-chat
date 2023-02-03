@@ -5,6 +5,7 @@ import type { User } from "@prisma/client";
 import UserListItem from "../../components/UserListItem";
 import { filterUsers } from "../../utils/filterUsers";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const mockUsers = [
   {
@@ -39,6 +40,7 @@ const mockUsers = [
 
 const NewMessage = () => {
   const [users, setUsers] = useState<User[]>(mockUsers);
+  const router = useRouter();
 
   return (
     <main className="flex h-screen w-screen flex-col items-center bg-slate-900">
@@ -54,7 +56,16 @@ const NewMessage = () => {
           filterUsers(e.target.value, mockUsers, setUsers);
         }}
       />
-      <Input inputType="text" placeholder="Create Server" icon={MdGroup} />
+      <Input
+        inputType="text"
+        placeholder="Create Server"
+        icon={MdGroup}
+        onKeyDown={(e) => {
+          if (e.key == "Enter" && e.currentTarget.value !== "") {
+            void router.push("/server");
+          }
+        }}
+      />
 
       <div>
         {users.map((user: User, key) => {
