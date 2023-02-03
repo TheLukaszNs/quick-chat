@@ -10,17 +10,17 @@ type Props = {
 
 const Dashboard = ({ user }: Props) => {
   const { query } = useRouter();
-  const dms = api.direct.getAll.useQuery();
+  const directRooms = api.direct.getAll.useQuery();
 
   return (
     <div className="h-screen bg-slate-900">
       <MessageHeader
-        name={user.name as string}
-        photo={user.image as string}
+        name={user.name ?? ""}
+        photo={user.image ?? ""}
         isRoom={false}
         active={21}
       ></MessageHeader>
-      {dms.data?.map((message, index) => {
+      {directRooms.data?.map((directRoom, index) => {
         return (
           <MessageUser
             key={index}
