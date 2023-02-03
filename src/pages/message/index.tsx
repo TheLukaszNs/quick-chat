@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import MessageHeader from "../../components/MessageHeader";
 import MessageUser from "../../components/MessageUser";
-import InputValue from "../../components/Input/inputValue";
+import InputMessage from "../../components/InputMessage";
 import { AiOutlineSend } from "react-icons/ai";
 
 const index = () => {
@@ -45,12 +45,12 @@ const index = () => {
         </div>
 
         <div className="self-center">
-          <InputValue
+          <InputMessage
             inputType="search"
             icon={AiOutlineSend}
             placeholder="wyslij wiadomosc"
             handleSend={handleSend}
-          ></InputValue>
+          ></InputMessage>
         </div>
       </div>
     </main>
