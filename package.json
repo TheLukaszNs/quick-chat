@@ -5,6 +5,7 @@
   "scripts": {
     "build:push": "prisma db push",
     "build:prisma": "prisma generate",
+    "build:server": "tsc --project tsconfig.server.json",
     "build:next": "next build",
     "build": "run-s build:*",
     "dev:wss": "cross-env PORT=3001 tsx watch src/server/wssDevServer.ts --tsconfig tsconfig.server.json ",
@@ -12,9 +13,7 @@
     "dev": "run-p dev:*",
     "postinstall": "prisma generate",
     "lint": "next lint",
-    "start:next": "next start",
-    "start:wss": "cross-env PORT=3001 tsx ./src/server/wssDevServer.ts",
-    "start": "run-p start:*"
+    "start": "cross-env NODE_ENV=production node ./dist/server/prodServer.js"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.5",
