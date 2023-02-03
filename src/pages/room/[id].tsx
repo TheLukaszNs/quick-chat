@@ -3,14 +3,14 @@ import MessageHeader from "../../components/MessageHeader";
 import MessageUser from "../../components/MessageUser";
 import InputMessage from "../../components/InputMessage";
 import { AiOutlineSend } from "react-icons/ai";
-import { Message, User } from "@prisma/client";
+import type { Message } from "@prisma/client";
 
 const Room = () => {
   const [messages, setMessages] = useState<Message[]>([]);
 
   const handleSend = (value: string): void => {
     if (!value) return;
-    //setMessages();
+    setMessages([]);
   };
 
   return (
@@ -27,7 +27,10 @@ const Room = () => {
             return (
               <MessageUser
                 message={element.content}
-                user={{}}
+                user={{
+                  name: "Wiesiu Sus",
+                  image: "",
+                }}
                 isDm={true}
                 key={element.id}
               ></MessageUser>
