@@ -6,6 +6,7 @@ import UserListItem from "../../components/UserListItem";
 import { filterUsers } from "../../utils/filterUsers";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import {api} from "../../utils/api";
 
 const mockUsers = [
   {
@@ -62,7 +63,9 @@ const NewMessage = () => {
         icon={MdGroup}
         onKeyDown={(e) => {
           if (e.key == "Enter" && e.currentTarget.value !== "") {
+            api.
             void router.push("/server");
+            
           }
         }}
       />
