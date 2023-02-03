@@ -46,7 +46,11 @@ export const MessageHeader = ({ name, photo, isRoom, active }: HeaderProps) => {
         )}
         <MdLogout
           className="ml-10 text-slate-50"
-          onClick={() => void signOut()}
+          onClick={() =>
+            void signOut({
+              callbackUrl: "/",
+            })
+          }
         />
       </div>
     </nav>

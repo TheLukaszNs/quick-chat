@@ -75,7 +75,7 @@ const Server = () => {
                   return (
                     <div key={index}>
                       <Link
-                        href="#"
+                        href="/message"
                         key={index}
                         className="my-3 text-xs lowercase text-slate-50"
                       >{`#${room.name}`}</Link>

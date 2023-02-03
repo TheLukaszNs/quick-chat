@@ -2,7 +2,7 @@ import React from "react";
 import { MessageHeader } from "../../components/MessageHeader";
 import MessageUser from "../../components/MessageUser";
 
-const MessagePage = () => {
+const Dashboard = () => {
   const User = {
     name: "Wiesiu",
     image:
@@ -23,4 +23,4 @@ const MessagePage = () => {
   );
 };
 
-export default MessagePage;
+export default Dashboard;
