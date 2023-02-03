@@ -3,13 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "next build",
+    "build:migrate": "prisma migrate deploy",
+    "build:next": "next build",
+    "build": "run-s build:*",
     "dev:wss": "cross-env PORT=3001 tsx watch src/server/wssDevServer.ts --tsconfig tsconfig.server.json ",
     "dev:next": "next dev",
     "dev": "run-p dev:*",
     "postinstall": "prisma generate",
     "lint": "next lint",
-    "start": "next start"
+    "start:next": "next start",
+    "start:ws": "cross-env PORT=3001 node dist/server/prodServer.ts --tsconfig tsconfig.server.json",
+    "start": "run-p start:*"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.5",
