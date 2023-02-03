@@ -1,7 +1,7 @@
 import Input from "../../components/Input";
 import { MdSearch, MdGroup } from "react-icons/md";
 import { useState } from "react";
-import { User } from "@prisma/client";
+import type { User } from "@prisma/client";
 import UserListItem from "../../components/UserListItem";
 import { filterUsers } from "../../utils/filterUsers";
 import Link from "next/link";

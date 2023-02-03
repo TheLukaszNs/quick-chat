@@ -1,14 +1,15 @@
-import { User } from "@prisma/client";
+import type { User } from "@prisma/client";
+import Image from "next/image";
 
 type Props = {
-  user: User;
+  user: Pick<User, "image" | "name">;
 };
 
 const UserListItem = ({ user }: Props) => {
   return (
     <div className="my-4 flex h-12 w-80 flex-row items-center rounded-2xl bg-slate-600 p-1">
-      <img
-        src={`data:image/jpeg;base64,${user.image}`}
+      <Image
+        src={user.image ?? ""}
         className="h-10 w-10 rounded-full "
         alt=""
       />

@@ -1,6 +1,5 @@
-import { ComponentPropsWithoutRef } from "react";
-import { Component, InputHTMLAttributes } from "react";
-import { IconType } from "react-icons/lib/esm/iconBase";
+import type { InputHTMLAttributes, ComponentPropsWithoutRef } from "react";
+import type { IconType } from "react-icons";
 
 type Props = ComponentPropsWithoutRef<"input"> & {
   inputType: InputHTMLAttributes<HTMLInputElement>["type"];

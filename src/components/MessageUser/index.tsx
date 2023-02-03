@@ -1,10 +1,10 @@
-import { User } from "@prisma/client";
 import React from "react";
 import Image from "next/image";
+import { type User } from "@prisma/client";
 
 interface MessageProps {
   message: string;
-  user: any;
+  user: Pick<User, "image" | "name">;
   isDm?: boolean;
 }
 
@@ -13,7 +13,7 @@ const MessageUser = ({ message, user, isDm }: MessageProps) => {
     <div className="m-auto mb-5 flex w-4/5">
       <div>
         <Image
-          src={`data:image/jpeg;base64,${user.image}`}
+          src={user.image ?? ""}
           className="mr-2 rounded-full"
           alt=""
           width="40"
