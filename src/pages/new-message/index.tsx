@@ -6,6 +6,8 @@ import UserListItem from "../../components/UserListItem";
 import { filterUsers } from "../../utils/filterUsers";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { api } from "../../utils/api";
+import { useSession } from "next-auth/react";
 
 const mockUsers = [
   {
@@ -39,8 +41,18 @@ const mockUsers = [
 ];
 
 const NewMessage = () => {
+  const { data: session } = useSession();
   const [users, setUsers] = useState<User[]>(mockUsers);
   const router = useRouter();
+  const addDirectRoomMutation = api.direct.addDirectRoom.useMutation();
+
+  async function handleNewDirectRoom(receiverId: string) {
+    const room = await addDirectRoomMutation.mutateAsync({
+      userId: session!.user!.id,
+      receiverId: receiverId,
+    });
+    void router.push(`/room/${room.id}`);
+  }
 
   return (
     <main className="flex h-screen w-screen flex-col items-center bg-slate-900">
@@ -62,17 +74,23 @@ const NewMessage = () => {
         icon={MdGroup}
         onKeyDown={(e) => {
           if (e.key == "Enter" && e.currentTarget.value !== "") {
+            // api.
             void router.push("/server");
           }
         }}
       />
 
-      <div>
-        {users.map((user: User, key) => {
+      <div className="flex flex-col">
+        {users.map((receiver: User, key) => {
           return (
-            <Link href="/message" key={key}>
-              <UserListItem user={user} />
-            </Link>
+            <button
+              key={key}
+              onClick={() => {
+                void handleNewDirectRoom(receiver.id);
+              }}
+            >
+              <UserListItem user={receiver} />
+            </button>
           );
         })}
       </div>

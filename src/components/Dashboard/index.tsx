@@ -9,6 +9,7 @@ type Props = {
 
 const Dashboard = ({ user }: Props) => {
   const directRooms = api.direct.getAll.useQuery();
+  const servers = api.server.getAll.useQuery();
 
   return (
     <div className="h-screen bg-slate-900">
@@ -31,6 +32,9 @@ const Dashboard = ({ user }: Props) => {
             }}
           />
         );
+      })}
+      {servers.data?.map((server, index) => {
+        return <p key={index}>{server.name}</p>;
       })}
     </div>
   );

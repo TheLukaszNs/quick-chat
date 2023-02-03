@@ -4,7 +4,7 @@ import { type User } from "@prisma/client";
 
 interface MessageProps {
   message: string;
-  user: Pick<User, "image" | "name">;
+  user: Pick<User, "name" | "image">;
   isDm?: boolean;
 }
 
