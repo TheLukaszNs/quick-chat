@@ -21,6 +21,7 @@ const AddUser = () => {
       userId: memberId,
       serverId: id as string,
     });
+    void router.back();
   }
 
   return (
@@ -46,7 +47,6 @@ const AddUser = () => {
               key={key}
               onClick={() => {
                 void handleNewMember(user.id);
-                void router.back();
               }}
             />
           );

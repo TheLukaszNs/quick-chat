@@ -11,6 +11,7 @@ const NewMessage = () => {
   const { data: session } = useSession();
   const router = useRouter();
   const addDirectRoomMutation = api.direct.addDirectRoom.useMutation();
+  const createServerMutation = api.server.createServer.useMutation();
   const users = api.users.getAll.useQuery();
   const [userInput, setUserInput] = useState("");
   const filteredUsers = users.data?.filter((user) => {
@@ -23,6 +24,14 @@ const NewMessage = () => {
       receiverId: receiverId,
     });
     await router.replace(`/room/${room.id}`);
+  }
+
+  async function handleNewServer(serverName: string) {
+    const server = await createServerMutation.mutateAsync({
+      userId: session?.user?.id as string,
+      name: serverName,
+    });
+    await router.replace(`/server/${server.id}`);
   }
 
   return (
@@ -45,8 +54,7 @@ const NewMessage = () => {
         icon={MdGroup}
         onKeyDown={(e) => {
           if (e.key == "Enter" && e.currentTarget.value !== "") {
-            // api.
-            void router.replace("/server");
+            void handleNewServer(e.currentTarget.value);
           }
         }}
       />
