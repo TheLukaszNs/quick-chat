@@ -44,6 +44,7 @@ export const directRouter = createTRPCRouter({
       })
     )
     .query(async ({ ctx, input }) => {
+      const { id } = ctx.session.user;
       const { directRoomId } = input;
 
       const directRoom = await ctx.prisma.directRoom.findFirst({
@@ -59,6 +60,14 @@ export const directRouter = createTRPCRouter({
           users: true,
         },
       });
+
+      if (!directRoom) {
+        return null;
+      }
+
+      if (!directRoom.users.some((user) => user.id === id)) {
+        throw new Error("You are not in this direct room");
+      }
 
       return directRoom;
     }),
