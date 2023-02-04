@@ -18,6 +18,13 @@ export const directRouter = createTRPCRouter({
       select: {
         directRooms: {
           include: {
+            users: {
+              where: {
+                id: {
+                  not: id,
+                },
+              },
+            },
             messages: true,
           },
         },
@@ -39,6 +46,32 @@ export const directRouter = createTRPCRouter({
     )
     .mutation(async ({ ctx, input }) => {
       const { userId, receiverId } = input;
+
+      const directRoom = await ctx.prisma.directRoom.findFirst({
+        where: {
+          AND: [
+            {
+              users: {
+                some: {
+                  id: userId,
+                },
+              },
+            },
+            {
+              users: {
+                some: {
+                  id: receiverId,
+                },
+              },
+            },
+          ],
+        },
+      });
+
+      if (directRoom) {
+        return directRoom;
+      }
+
       const newDirectRoom = await ctx.prisma.directRoom.create({
         data: {
           users: {
