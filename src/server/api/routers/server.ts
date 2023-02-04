@@ -25,6 +25,36 @@ export const serverRouter = createTRPCRouter({
 
     return user.servers;
   }),
+  getServer: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const { id: userId } = ctx.session.user;
+      const { id } = input;
+
+      const server = await ctx.prisma.server.findFirst({
+        where: {
+          id,
+        },
+        include: {
+          users: true,
+          rooms: true,
+        },
+      });
+
+      if (!server) {
+        return null;
+      }
+
+      if (!server.users.some((user) => user.id === userId)) {
+        throw new Error("You are not a member of this server");
+      }
+
+      return server;
+    }),
   createServer: protectedProcedure
     .input(
       z.object({
@@ -72,5 +102,30 @@ export const serverRouter = createTRPCRouter({
       });
 
       return room;
+    }),
+  addMember: protectedProcedure
+    .input(
+      z.object({
+        userId: z.string(),
+        serverId: z.string(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const { userId, serverId } = input;
+
+      const server = await ctx.prisma.server.update({
+        where: {
+          id: serverId,
+        },
+        data: {
+          users: {
+            connect: {
+              id: userId,
+            },
+          },
+        },
+      });
+
+      return server;
     }),
 });
