@@ -4,11 +4,15 @@ import { type User } from "@prisma/client";
 
 interface MessageProps {
   message: string;
-  user: Pick<User, "name" | "image">;
+  user?: Pick<User, "name" | "image">;
   isDm?: boolean;
 }
 
 const MessageUser = ({ message, user, isDm }: MessageProps) => {
+  if (!user) {
+    return null;
+  }
+
   return (
     <div className="m-auto mb-5 flex w-4/5">
       <div>

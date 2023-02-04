@@ -27,10 +27,8 @@ const Dashboard = ({ user }: Props) => {
           <MessageUser
             key={index}
             message={messages[messages.length - 1]?.content ?? ""}
-            user={{
-              name: "",
-              image: "",
-            }}
+            user={directRoom.users[0]}
+            isDm
           />
         );
       })}
