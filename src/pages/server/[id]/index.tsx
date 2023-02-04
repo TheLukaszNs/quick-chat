@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MessageHeader } from "../../components/MessageHeader";
+import { MessageHeader } from "../../../components/MessageHeader";
 
 const rooms: string[] = ["room 1", "room 2", "room 3", "room 4", "room 5"];
 
