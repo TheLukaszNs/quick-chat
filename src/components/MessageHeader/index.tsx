@@ -36,7 +36,7 @@ export const MessageHeader = ({ name, photo, isRoom, active }: HeaderProps) => {
       </div>
       <div className="flex flex-row justify-between">
         {isRoom ? (
-          <div>
+          <div className="flex">
             <Link href="/add-user" className="text-slate-50">
               <BsFillPersonPlusFill />
             </Link>
