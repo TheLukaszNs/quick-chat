@@ -1,9 +1,8 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import MessageHeader from "../../components/MessageHeader";
 import MessageUser from "../../components/MessageUser";
 import InputMessage from "../../components/InputMessage";
 import { AiOutlineSend } from "react-icons/ai";
-import type { Message } from "@prisma/client";
 import { useRouter } from "next/router";
 import { api } from "../../utils/api";
 import { useSession } from "next-auth/react";
@@ -17,7 +16,6 @@ const Room = () => {
   const { data: sessionData } = useSession();
 
   const { id } = router.query;
-  const userId = sessionData?.user?.id;
 
   const roomQuery = api.direct.getDirectRoom.useQuery(
     {
