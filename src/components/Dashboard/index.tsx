@@ -2,6 +2,7 @@ import type { User } from "@prisma/client";
 import MessageHeader from "../MessageHeader";
 import { api } from "../../utils/api";
 import MessageUser from "../MessageUser";
+import ServerListItem from "../ServerListItem";
 
 type Props = {
   user: User;
@@ -34,7 +35,7 @@ const Dashboard = ({ user }: Props) => {
         );
       })}
       {servers.data?.map((server, index) => {
-        return <p key={index}>{server.name}</p>;
+        return <ServerListItem key={index} serverName={server.name} />;
       })}
     </div>
   );
