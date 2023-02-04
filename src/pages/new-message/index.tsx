@@ -22,7 +22,7 @@ const NewMessage = () => {
       userId: session?.user?.id ?? "0",
       receiverId: receiverId,
     });
-    await router.push(`/room/${room.id}`);
+    await router.replace(`/room/${room.id}`);
   }
 
   return (
@@ -46,7 +46,7 @@ const NewMessage = () => {
         onKeyDown={(e) => {
           if (e.key == "Enter" && e.currentTarget.value !== "") {
             // api.
-            void router.push("/server");
+            void router.replace("/server");
           }
         }}
       />
