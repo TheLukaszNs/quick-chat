@@ -3,6 +3,7 @@ import MessageHeader from "../MessageHeader";
 import { api } from "../../utils/api";
 import MessageUser from "../MessageUser";
 import ServerListItem from "../ServerListItem";
+import Link from "next/link";
 
 type Props = {
   user: User;
@@ -24,16 +25,21 @@ const Dashboard = ({ user }: Props) => {
         const messages = directRoom.messages;
 
         return (
-          <MessageUser
-            key={index}
-            message={messages[messages.length - 1]?.content ?? ""}
-            user={directRoom.users[0]}
-            isDm
-          />
+          <Link key={index} href={`/room/${directRoom.id}`}>
+            <MessageUser
+              message={messages[messages.length - 1]?.content ?? ""}
+              user={directRoom.users[0]}
+              isDm
+            />
+          </Link>
         );
       })}
       {servers.data?.map((server, index) => {
-        return <ServerListItem key={index} serverName={server.name} />;
+        return (
+          <Link key={index} href={`/server/${server.id}`}>
+            <ServerListItem serverName={server.name} />
+          </Link>
+        );
       })}
     </div>
   );

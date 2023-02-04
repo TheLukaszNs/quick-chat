@@ -5,19 +5,24 @@ import UserListItem from "../../components/UserListItem";
 import { useRouter } from "next/router";
 import { api } from "../../utils/api";
 import { useSession } from "next-auth/react";
+import { useState } from "react";
 
 const NewMessage = () => {
   const { data: session } = useSession();
   const router = useRouter();
   const addDirectRoomMutation = api.direct.addDirectRoom.useMutation();
   const users = api.users.getAll.useQuery();
+  const [userInput, setUserInput] = useState("");
+  const filteredUsers = users.data?.filter((user) => {
+    user.name?.startsWith(userInput);
+  });
 
   async function handleNewDirectRoom(receiverId: string) {
     const room = await addDirectRoomMutation.mutateAsync({
       userId: session?.user?.id ?? "0",
       receiverId: receiverId,
     });
-    void router.push(`/room/${room.id}`);
+    await router.push(`/room/${room.id}`);
   }
 
   return (
@@ -26,7 +31,14 @@ const NewMessage = () => {
         New Message
       </header>
 
-      <Input inputType="text" placeholder="Find User" icon={MdSearch} />
+      <Input
+        inputType="text"
+        placeholder="Find User"
+        icon={MdSearch}
+        onChange={(e) => {
+          setUserInput(e.target.value);
+        }}
+      />
       <Input
         inputType="text"
         placeholder="Create Server"
@@ -40,7 +52,7 @@ const NewMessage = () => {
       />
 
       <div className="flex flex-col">
-        {users.data?.map((receiver: User, key) => {
+        {filteredUsers?.map((receiver: User, key) => {
           return (
             <button
               key={key}

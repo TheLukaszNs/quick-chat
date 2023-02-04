@@ -1,11 +1,15 @@
 import type { ComponentPropsWithoutRef } from "react";
 
-type Props = ComponentPropsWithoutRef<"button"> & {
+type Props = ComponentPropsWithoutRef<"div"> & {
   serverName: string;
 };
 
 const ServerListItem = ({ serverName, ...props }: Props) => {
-  return <button {...props}>{serverName}</button>;
+  return (
+    <div className="font-bold text-slate-50" {...props}>
+      {serverName}
+    </div>
+  );
 };
 
 export default ServerListItem;
