@@ -1,9 +1,7 @@
 import Input from "../../components/Input";
 import { MdSearch, MdGroup } from "react-icons/md";
-import { useState } from "react";
 import type { User } from "@prisma/client";
 import UserListItem from "../../components/UserListItem";
-import { filterUsers } from "../../utils/filterUsers";
 import { useRouter } from "next/router";
 import { api } from "../../utils/api";
 import { useSession } from "next-auth/react";

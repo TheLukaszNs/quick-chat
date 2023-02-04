@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef } from "react";
+import type { ComponentPropsWithoutRef } from "react";
 
 type Props = ComponentPropsWithoutRef<"button"> & {
   serverName: string;
