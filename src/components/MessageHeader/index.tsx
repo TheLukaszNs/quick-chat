@@ -3,7 +3,7 @@ import Link from "next/link";
 import { BsFillPersonPlusFill } from "react-icons/bs";
 import { BiMessageRoundedAdd } from "react-icons/bi";
 import Image from "next/image";
-import { MdLogout } from "react-icons/md";
+import { MdLogout, MdOutlineAddBusiness } from "react-icons/md";
 import { signOut } from "next-auth/react";
 interface HeaderProps {
   name: string;
@@ -36,9 +36,14 @@ export const MessageHeader = ({ name, photo, isRoom, active }: HeaderProps) => {
       </div>
       <div className="flex flex-row justify-between">
         {isRoom ? (
-          <Link href="/add-user" className="text-slate-50">
-            <BsFillPersonPlusFill />
-          </Link>
+          <div>
+            <Link href="/add-user" className="text-slate-50">
+              <BsFillPersonPlusFill />
+            </Link>
+            <Link href="/new-room" className="text-slate-50">
+              <MdOutlineAddBusiness />
+            </Link>
+          </div>
         ) : (
           <Link href="/new-message" className="text-slate-50">
             <BiMessageRoundedAdd />
