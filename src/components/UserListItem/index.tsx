@@ -15,6 +15,8 @@ const UserListItem = ({ user, ...props }: Props) => {
       <Image
         src={user.image ?? ""}
         className="h-10 w-10 rounded-full "
+        width={40}
+        height={40}
         alt=""
       />
       <div className="ml-2 font-bold text-slate-50">{user.name}</div>
