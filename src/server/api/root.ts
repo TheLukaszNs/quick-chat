@@ -4,6 +4,7 @@ import { serverRouter } from "./routers/server";
 import EventEmitter from "events";
 import { roomRouter } from "./routers/room";
 import { directRouter } from "./routers/direct";
+import { usersRouter } from "./routers/users";
 
 /**
  * This is the primary router for your server.
@@ -15,6 +16,7 @@ export const appRouter = createTRPCRouter({
   server: serverRouter,
   room: roomRouter,
   direct: directRouter,
+  users: usersRouter,
   healthcheck: publicProcedure.query(() => "yay!"),
 });
 
