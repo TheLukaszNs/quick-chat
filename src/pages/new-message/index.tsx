@@ -17,7 +17,7 @@ const NewMessage = () => {
       userId: session?.user?.id ?? "0",
       receiverId: receiverId,
     });
-    void router.push(`/room/${room.id}`);
+    await router.push(`/room/${room.id}`);
   }
 
   return (

@@ -37,6 +37,31 @@ export const directRouter = createTRPCRouter({
 
     return user.directRooms;
   }),
+  getDirectRoom: protectedProcedure
+    .input(
+      z.object({
+        directRoomId: z.string(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const { directRoomId } = input;
+
+      const directRoom = await ctx.prisma.directRoom.findFirst({
+        where: {
+          id: directRoomId,
+        },
+        include: {
+          messages: {
+            include: {
+              author: true,
+            },
+          },
+          users: true,
+        },
+      });
+
+      return directRoom;
+    }),
   addDirectRoom: protectedProcedure
     .input(
       z.object({
@@ -119,13 +144,13 @@ export const directRouter = createTRPCRouter({
         directRoomId: z.string(),
       })
     )
-    .mutation(({ ctx, input }) => {
+    .mutation(async ({ ctx, input }) => {
       const { text, directRoomId } = input;
       const { id: userId } = ctx.session.user;
 
       const eeKey = newMessageEventKeyBuilder(directRoomId);
 
-      const message = ctx.prisma.directMessage.create({
+      const message = await ctx.prisma.directMessage.create({
         data: {
           content: text,
           author: {
@@ -140,6 +165,8 @@ export const directRouter = createTRPCRouter({
           },
         },
       });
+
+      console.log("new message", message);
 
       eventEmitter.emit(eeKey, message);
 
