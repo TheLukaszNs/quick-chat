@@ -11,7 +11,7 @@ const AddUser = () => {
   const users = api.users.getAll.useQuery();
   const [userInput, setUserInput] = useState("");
   const filteredUsers = users.data?.filter((user) => {
-    user.name?.startsWith(userInput);
+    return user.name?.startsWith(userInput);
   });
 
   return (
