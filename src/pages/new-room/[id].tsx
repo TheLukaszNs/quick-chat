@@ -9,13 +9,16 @@ const NewRoom = () => {
   const router = useRouter();
   const { data: session } = useSession();
   const addRoomMutation = api.server.addRoom.useMutation();
+  const { id } = router.query;
 
-  async function handleNewDirectRoom(name: string) {
+  async function handleNewRoom(name: string) {
     const room = await addRoomMutation.mutateAsync({
-      userId: session?.user?.id ?? "0",
+      serverId: id,
       name: name,
     });
     void router.push(`/room/${room.id}`);
+
+    return;
   }
 
   return (
@@ -26,12 +29,11 @@ const NewRoom = () => {
 
       <Input
         inputType="text"
-        placeholder="Create Server"
+        placeholder="Create Room"
         icon={MdOutlineAddBusiness}
         onKeyDown={(e) => {
           if (e.key == "Enter" && e.currentTarget.value !== "") {
-            api.server.addRoom.useMutation().mutateAsync;
-            void router.push("/server");
+            const room: number = handleNewRoom(e.currentTarget.value);
           }
         }}
       />

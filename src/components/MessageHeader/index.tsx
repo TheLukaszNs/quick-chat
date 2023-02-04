@@ -10,9 +10,16 @@ interface HeaderProps {
   photo: string;
   isRoom: boolean;
   active?: number;
+  idServer?: number;
 }
 
-export const MessageHeader = ({ name, photo, isRoom, active }: HeaderProps) => {
+export const MessageHeader = ({
+  name,
+  photo,
+  isRoom,
+  active,
+  idServer,
+}: HeaderProps) => {
   return (
     <nav className="sticky top-0 left-0 right-0 mb-5 flex w-screen items-center justify-between bg-slate-800 p-5">
       <div className="flex items-center">
@@ -40,7 +47,7 @@ export const MessageHeader = ({ name, photo, isRoom, active }: HeaderProps) => {
             <Link href="/add-user" className="text-slate-50">
               <BsFillPersonPlusFill />
             </Link>
-            <Link href="/new-room" className="text-slate-50">
+            <Link href={`/new-room/${idServer}`} className="text-slate-50">
               <MdOutlineAddBusiness />
             </Link>
           </div>
