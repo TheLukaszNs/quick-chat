@@ -1,18 +1,28 @@
-import Input from "../../components/Input";
+import Input from "../../../components/Input";
 import { MdSearch } from "react-icons/md";
 import type { User } from "@prisma/client";
-import UserListItem from "../../components/UserListItem";
+import UserListItem from "../../../components/UserListItem";
 import { useRouter } from "next/router";
-import { api } from "../../utils/api";
+import { api } from "../../../utils/api";
 import { useState } from "react";
 
 const AddUser = () => {
   const router = useRouter();
+  const { id } = router.query;
   const users = api.users.getAll.useQuery();
   const [userInput, setUserInput] = useState("");
   const filteredUsers = users.data?.filter((user) => {
     return user.name?.startsWith(userInput);
   });
+  const addMemberMutation = api.server.addMember.useMutation();
+
+  async function handleNewMember(memberId: string) {
+    await addMemberMutation.mutateAsync({
+      userId: memberId,
+      serverId: id as string,
+    });
+    void router.back();
+  }
 
   return (
     <main className="flex h-screen w-screen flex-col items-center bg-slate-900">
@@ -36,7 +46,7 @@ const AddUser = () => {
               user={user}
               key={key}
               onClick={() => {
-                void router.back();
+                void handleNewMember(user.id);
               }}
             />
           );
