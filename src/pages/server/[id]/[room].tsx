@@ -77,7 +77,7 @@ const ServerRoom = () => {
         <InputMessage
           inputType="search"
           icon={AiOutlineSend}
-          placeholder="wyslij wiadomosc"
+          placeholder="Send message"
           handleSend={(value) => {
             void newMessageMutation.mutateAsync({
               roomId: id as string,

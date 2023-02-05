@@ -40,9 +40,9 @@ export const MessageHeader = ({
         <div className="flex-col px-5">
           <div className="text-slate-50">{name}</div>
           {isRoom ? (
-            <div className="text-green-600">{active} użytkowników</div>
+            <div className="text-green-600">{active} users</div>
           ) : (
-            <div className="text-green-600">Aktywny(a) teraz</div>
+            <div className="text-green-600">Active now</div>
           )}
         </div>
       </div>
