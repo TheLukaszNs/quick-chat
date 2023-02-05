@@ -175,8 +175,6 @@ export const directRouter = createTRPCRouter({
         },
       });
 
-      console.log("new message", message);
-
       eventEmitter.emit(eeKey, message);
 
       return message;

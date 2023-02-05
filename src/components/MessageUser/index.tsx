@@ -14,11 +14,11 @@ const MessageUser = ({ message, user, isDm }: MessageProps) => {
   }
 
   return (
-    <div className="m-auto mb-5 flex w-4/5">
+    <div className="m-auto flex w-80 gap-3">
       <div>
         <Image
           src={user.image ?? ""}
-          className="mr-2 rounded-full"
+          className="rounded-full"
           alt=""
           width="40"
           height="40"

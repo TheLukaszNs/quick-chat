@@ -19,17 +19,19 @@ const Server = () => {
         serverId={id as string}
       />
 
-      {rooms?.map((room, index) => {
-        return (
-          <Link
-            href="/message"
-            key={index}
-            className="mx-4 lowercase text-slate-50"
-          >
-            {`#${room.name}`}
-          </Link>
-        );
-      })}
+      <div className="flex flex-col gap-6 font-bold">
+        {rooms?.map((room, index) => {
+          return (
+            <Link
+              href={`/server/${id as string}/${room.id}`}
+              key={index}
+              className="mx-4 lowercase text-slate-50"
+            >
+              {`#${room.name}`}
+            </Link>
+          );
+        })}
+      </div>
     </main>
   );
 };

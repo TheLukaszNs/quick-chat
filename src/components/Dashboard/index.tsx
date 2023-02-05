@@ -14,33 +14,35 @@ const Dashboard = ({ user }: Props) => {
   const servers = api.server.getAll.useQuery();
 
   return (
-    <div className="h-screen bg-slate-900">
+    <div className="flex h-screen flex-col overflow-hidden bg-slate-900">
       <MessageHeader
         name={user.name ?? ""}
         photo={user.image ?? ""}
         isRoom={false}
         active={21}
       ></MessageHeader>
-      {directRooms.data?.map((directRoom, index) => {
-        const messages = directRoom.messages;
+      <div className="flex h-full flex-col gap-6 overflow-y-scroll pb-4">
+        {directRooms.data?.map((directRoom, index) => {
+          const messages = directRoom.messages;
 
-        return (
-          <Link key={index} href={`/room/${directRoom.id}`}>
-            <MessageUser
-              message={messages[messages.length - 1]?.content ?? ""}
-              user={directRoom.users[0]}
-              isDm
-            />
-          </Link>
-        );
-      })}
-      {servers.data?.map((server, index) => {
-        return (
-          <Link key={index} href={`/server/${server.id}`}>
-            <ServerListItem serverName={server.name} />
-          </Link>
-        );
-      })}
+          return (
+            <Link key={index} href={`/room/${directRoom.id}`}>
+              <MessageUser
+                message={messages[messages.length - 1]?.content ?? ""}
+                user={directRoom.users[0]}
+                isDm
+              />
+            </Link>
+          );
+        })}
+        {servers.data?.map((server, index) => {
+          return (
+            <Link key={index} href={`/server/${server.id}`}>
+              <ServerListItem serverName={server.name} />
+            </Link>
+          );
+        })}
+      </div>
     </div>
   );
 };
