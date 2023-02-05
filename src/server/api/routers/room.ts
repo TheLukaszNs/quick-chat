@@ -8,6 +8,28 @@ const newMessageEventKeyBuilder = <T extends string>(roomId: T) =>
   `new-message-${roomId}` as const;
 
 export const roomRouter = createTRPCRouter({
+  getRoom: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+      })
+    )
+    .query(({ ctx, input }) => {
+      const { id } = input;
+
+      return ctx.prisma.room.findUnique({
+        where: {
+          id,
+        },
+        include: {
+          messages: {
+            include: {
+              author: true,
+            },
+          },
+        },
+      });
+    }),
   onNewMessage: protectedProcedure
     .input(
       z.object({

@@ -88,14 +88,12 @@ export const serverRouter = createTRPCRouter({
     .mutation(async ({ ctx, input }) => {
       const { name, serverId } = input;
 
-      const room = await ctx.prisma.server.update({
-        where: {
-          id: serverId,
-        },
+      const room = await ctx.prisma.room.create({
         data: {
-          rooms: {
-            create: {
-              name,
+          name,
+          server: {
+            connect: {
+              id: serverId,
             },
           },
         },

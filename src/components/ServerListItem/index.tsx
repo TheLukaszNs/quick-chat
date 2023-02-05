@@ -1,4 +1,5 @@
 import type { ComponentPropsWithoutRef } from "react";
+import { InitialAvatar } from "../InitialAvatar";
 
 type Props = ComponentPropsWithoutRef<"div"> & {
   serverName: string;
@@ -7,9 +8,10 @@ type Props = ComponentPropsWithoutRef<"div"> & {
 const ServerListItem = ({ serverName, ...props }: Props) => {
   return (
     <div
-      className="my-4 mx-auto flex h-12 w-80 flex-row items-center justify-center rounded-2xl bg-slate-600 font-bold text-slate-50"
+      className="mx-auto flex w-80 flex-row items-center gap-3 rounded-md py-2 font-bold text-slate-50"
       {...props}
     >
+      <InitialAvatar name={serverName} />
       {serverName}
     </div>
   );

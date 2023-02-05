@@ -14,9 +14,12 @@ const Input = ({ inputType, placeholder, icon: Icon, ...props }: Props) => {
         placeholder={placeholder}
         {...props}
       />
-      <div className="mr-6 font-bold text-slate-50">
+      <button
+        type="submit"
+        className="mr-2 rounded-full p-4 font-bold text-slate-50"
+      >
         <Icon />
-      </div>
+      </button>
     </div>
   );
 };

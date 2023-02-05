@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import Input from "../../components/Input";
 import { MdOutlineAddBusiness } from "react-icons/md";
 import { api } from "../../utils/api";
-import { useSession } from "next-auth/react";
 
 const NewRoom = () => {
   const router = useRouter();
