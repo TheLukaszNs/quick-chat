@@ -25,6 +25,12 @@ const config = {
         port: "",
         pathname: "/avatars/**",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.discordapp.com",
+        port: "",
+        pathname: "/embed/avatars/**",
+      },
     ],
   },
 };
