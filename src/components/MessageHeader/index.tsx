@@ -44,9 +44,6 @@ export const MessageHeader = ({
       <div className="flex flex-row justify-between">
         {isRoom ? (
           <div className="flex">
-            <Link href="/add-user" className="text-slate-50">
-              <BsFillPersonPlusFill />
-            </Link>
 
             <Link
               href={`/server/${serverId}/add-user`}
